@@ -26,7 +26,7 @@ public class AddressBookMain extends ContactPerson {
                 case 2:
                     newPersonDetails.editDetails();
                     break;
-                case 3 :
+                case 3:
                     newPersonDetails.deleteDetails();
                     break;
             }
@@ -59,8 +59,8 @@ public class AddressBookMain extends ContactPerson {
         System.out.println("Enter email: ");
         newPersonDetails.setEmail(scanner.next());
         // Adding details in address book
-        personDetails.add(new ContactPerson(newPersonDetails.getFirstName(),newPersonDetails.getLastName(),newPersonDetails.getAddress(),
-                        newPersonDetails.getCity(),newPersonDetails.getState(),newPersonDetails.getZip(),newPersonDetails.getPhoneNumber(),newPersonDetails.getEmail()));
+        personDetails.add(new ContactPerson(newPersonDetails.getFirstName(), newPersonDetails.getLastName(), newPersonDetails.getAddress(),
+                newPersonDetails.getCity(), newPersonDetails.getState(), newPersonDetails.getZip(), newPersonDetails.getPhoneNumber(), newPersonDetails.getEmail()));
         personDetails.forEach(System.out::println);
     }
 
@@ -93,22 +93,23 @@ public class AddressBookMain extends ContactPerson {
             System.out.println("Please Enter A Valid Name:");
         }
     }
-    public void deleteDetails(){
+
+    public void deleteDetails() {
         System.out.println("Enter the name you want to delete:");
         String choiceName = scanner.next();
         Iterator<ContactPerson> iterator = personDetails.iterator();
         int flag = 0;
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             ContactPerson delObj = iterator.next();
-            if (choiceName.equals(delObj.getFirstName())){
+            if (choiceName.equals(delObj.getFirstName())) {
                 iterator.remove();
                 flag = 1;
                 personDetails.forEach(System.out::println);
             }
         }
-        if (flag == 1){
+        if (flag == 1) {
             System.out.println("Contact deleted:");
-        }else {
+        } else {
             System.out.println("Contact not found:");
         }
 
