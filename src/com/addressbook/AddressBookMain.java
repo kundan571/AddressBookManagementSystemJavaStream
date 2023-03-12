@@ -30,4 +30,8 @@ public class AddressBookMain extends ContactPerson {
         personDetails.add(newpersonDetails);
         System.out.println(personDetails);
     }
+    public static void main(String[] args) {
+        AddressBookMain addressBookMain = new AddressBookMain();
+        addressBookMain.addContact();
+    }
 }
