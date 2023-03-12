@@ -116,7 +116,7 @@ public class AddressBookMain extends ContactPerson {
 
     }
 
-    public static void main(String[] args) {
-        newPersonDetails.menu();
-    }
+//    public static void main(String[] args) {
+//        newPersonDetails.menu();
+//    }
 }
