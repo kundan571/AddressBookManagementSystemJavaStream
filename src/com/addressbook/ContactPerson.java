@@ -7,10 +7,10 @@ public class ContactPerson {
     String city;
     String state;
     int zip;
-    long phoneNumber;
+    String phoneNumber;
     String email;
 
-    public ContactPerson(String firstName, String lastName, String address, String city, String state, int zip, long phoneNumber, String email) {
+    public ContactPerson(String firstName, String lastName, String address, String city, String state, int zip, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -69,11 +69,11 @@ public class ContactPerson {
         this.zip = zip;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
