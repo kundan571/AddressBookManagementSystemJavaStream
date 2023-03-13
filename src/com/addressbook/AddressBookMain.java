@@ -1,8 +1,6 @@
 package com.addressbook;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBookMain extends ContactPerson {
 
@@ -40,10 +38,15 @@ public class AddressBookMain extends ContactPerson {
     }
 
     public void addContact() {
-
         // Taking user input
         System.out.println("Enter first name: ");
         newPersonDetails.setFirstName(scanner.next());
+        Optional<ContactPerson> ref_var = personDetails.stream()
+                .filter(name -> getFirstName().equals(name.getFirstName())).findAny();
+        if (ref_var.isPresent()) {
+            System.out.println("Name already exist");
+            return;
+        }
         System.out.println("Enter last name: ");
         newPersonDetails.setLastName(scanner.next());
         System.out.println("Enter Address: ");
