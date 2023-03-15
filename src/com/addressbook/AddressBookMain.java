@@ -19,7 +19,7 @@ public class AddressBookMain extends ContactPerson {
         System.out.println("Enter city: ");
         newpersonDetails.setCity(scanner.nextLine());
         System.out.println("Enter state: ");
-        newpersonDetails.setCity(scanner.nextLine());
+        newpersonDetails.setState(scanner.nextLine());
         System.out.println("Enter zip: ");
         newpersonDetails.setZip(scanner.nextInt());
         System.out.println("Enter phone_number: ");
