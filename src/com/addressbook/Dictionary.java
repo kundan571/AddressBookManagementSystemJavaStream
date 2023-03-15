@@ -1,12 +1,15 @@
 package com.addressbook;
 
+
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Dictionary {
 
+    static AddressBookMain addressBookMain = new AddressBookMain();
     static Dictionary dictionary = new Dictionary();
-    HashMap<String, AddressBookMain> addressHashMap = new HashMap<>();
+    public static Map<String, AddressBookMain> addressHashMap = new HashMap<>();
     static Scanner scanner = new Scanner(System.in);
 
     // Method to add multiple Address book
@@ -52,14 +55,22 @@ public class Dictionary {
         }
     }
 
+//    void searchPersonDetails() {
+//        System.out.println("Enter the name of state:");
+//        String stateName = scanner.next();
+//        addressHashMap.get(addressBookMain).personDetails.stream()
+//                .filter(state -> state.state.equals(stateName))
+//                .forEach(key -> System.out.println(key));
+//    }
+
     public static void main(String[] args) {
         int flag = 0;
         while (flag == 0) {
-            System.out.println("Enter 1 to add");
-            System.out.println("Enter 2 to view:");
-            System.out.println("Enter 3 to delete");
+            System.out.println("Enter 1 to Add");
+            System.out.println("Enter 2 to View:");
+            System.out.println("Enter 3 to Delete");
             System.out.println("Enter 4 to Select");
-            System.out.println("Enter 5 to exit:");
+            System.out.println("Enter 5 to Exit:");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:

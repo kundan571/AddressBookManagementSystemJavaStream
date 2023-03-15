@@ -1,11 +1,14 @@
 package com.addressbook;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
+
 
 public class AddressBookMain extends ContactPerson {
 
     public static AddressBookMain newPersonDetails = new AddressBookMain();
-    static ArrayList<ContactPerson> personDetails = new ArrayList<>();
+    public static ArrayList<ContactPerson> personDetails = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
 
     public void menu() {
@@ -13,6 +16,7 @@ public class AddressBookMain extends ContactPerson {
         System.out.println("Enter 1 to add contact:");
         System.out.println("Enter 2 to edit contact:");
         System.out.println("Enter 3 to delete contact");
+        System.out.println("Enter 4 to Search contact");
         System.out.println("Enter 0 to exit:");
         menu = scanner.nextInt();
         while (menu != 0) {
@@ -27,10 +31,14 @@ public class AddressBookMain extends ContactPerson {
                 case 3:
                     newPersonDetails.deleteDetails();
                     break;
+                case 4:
+                    newPersonDetails.searchPersonDetails();
+                    break;
             }
             System.out.println("Enter 1 to add contact:");
             System.out.println("Enter 2 to edit contact:");
             System.out.println("Enter 3 to delete contact");
+            System.out.println("Enter 4 to Search contact");
             System.out.println("Enter 0 to exit:");
             menu = scanner.nextInt();
         }
@@ -54,7 +62,7 @@ public class AddressBookMain extends ContactPerson {
         System.out.println("Enter city: ");
         newPersonDetails.setCity(scanner.next());
         System.out.println("Enter state: ");
-        newPersonDetails.setCity(scanner.next());
+        newPersonDetails.setState(scanner.next());
         System.out.println("Enter zip: ");
         newPersonDetails.setZip(scanner.nextInt());
         System.out.println("Enter phone_number: ");
@@ -115,10 +123,18 @@ public class AddressBookMain extends ContactPerson {
         } else {
             System.out.println("Contact not found:");
         }
-
+    }
+    // search by state
+    void searchPersonDetails() {
+        System.out.println("Enter the name of state:");
+        String stateName = scanner.next();
+        List<ContactPerson> ref_var = personDetails.stream()
+                .filter(state -> state.state.equals(stateName)).collect(Collectors.toList());
+                for(ContactPerson contactPerson : ref_var){
+                    System.out.println("Details are: " + contactPerson);
+                }
 
     }
-
 //    public static void main(String[] args) {
 //        newPersonDetails.menu();
 //    }
