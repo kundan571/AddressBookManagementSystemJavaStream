@@ -15,10 +15,11 @@ public class AddressBookMain extends ContactPerson {
         while (menu != 0) {
             System.out.println("Enter 1 to add contact:");
             System.out.println("Enter 2 to edit contact:");
-            System.out.println("Enter 3 to delete contact");
-            System.out.println("Enter 4 to Search contact");
-            System.out.println("Enter 5 to count person details by city");
-            System.out.println("Enter 6 to count person details by state");
+            System.out.println("Enter 3 to delete contact:");
+            System.out.println("Enter 4 to Search contact:");
+            System.out.println("Enter 5 to count person details by city:");
+            System.out.println("Enter 6 to count person details by state:");
+            System.out.println("Enter 7 to sort by name:");
             System.out.println("Enter 0 to exit:");
             menu = scanner.nextInt();
             switch (menu) {
@@ -40,6 +41,9 @@ public class AddressBookMain extends ContactPerson {
                     break;
                 case 6:
                     newPersonDetails.countByState();
+                    break;
+                case 7:
+                    newPersonDetails.sortByName();
                     break;
             }
         }
@@ -154,5 +158,12 @@ public class AddressBookMain extends ContactPerson {
         String stateName = scanner.next();
         long countState = personDetails.stream().filter(state -> stateName.equals(state.getState())).count();
         System.out.println("Number of person details by state: " + stateName + " -> " + countState);
+    }
+
+    // Sort by alphabetical order by person name
+    void sortByName() {
+        System.out.println("Sorted Details are:!!");
+        personDetails.stream().sorted(Comparator.comparing(ContactPerson::getFirstName))
+                .forEach(System.out::println);
     }
 }
