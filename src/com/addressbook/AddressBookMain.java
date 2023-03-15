@@ -20,6 +20,7 @@ public class AddressBookMain extends ContactPerson {
             System.out.println("Enter 5 to count person details by city:");
             System.out.println("Enter 6 to count person details by state:");
             System.out.println("Enter 7 to sort by name:");
+            System.out.println("Enter 8 to sort by zip:");
             System.out.println("Enter 0 to exit:");
             menu = scanner.nextInt();
             switch (menu) {
@@ -44,6 +45,9 @@ public class AddressBookMain extends ContactPerson {
                     break;
                 case 7:
                     newPersonDetails.sortByName();
+                    break;
+                case 8:
+                    newPersonDetails.sortByZip();
                     break;
             }
         }
@@ -164,6 +168,13 @@ public class AddressBookMain extends ContactPerson {
     void sortByName() {
         System.out.println("Sorted Details are:!!");
         personDetails.stream().sorted(Comparator.comparing(ContactPerson::getFirstName))
+                .forEach(System.out::println);
+    }
+
+    // sort person details by zip
+    void sortByZip() {
+        System.out.println("Sorted Details are:!!");
+        personDetails.stream().sorted(Comparator.comparing(ContactPerson::getZip))
                 .forEach(System.out::println);
     }
 }
