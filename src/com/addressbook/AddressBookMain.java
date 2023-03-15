@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-
 public class AddressBookMain extends ContactPerson {
 
     public static AddressBookMain newPersonDetails = new AddressBookMain();
@@ -12,14 +11,16 @@ public class AddressBookMain extends ContactPerson {
     static Scanner scanner = new Scanner(System.in);
 
     public void menu() {
-        int menu;
-        System.out.println("Enter 1 to add contact:");
-        System.out.println("Enter 2 to edit contact:");
-        System.out.println("Enter 3 to delete contact");
-        System.out.println("Enter 4 to Search contact");
-        System.out.println("Enter 0 to exit:");
-        menu = scanner.nextInt();
+        int menu = 1;
         while (menu != 0) {
+            System.out.println("Enter 1 to add contact:");
+            System.out.println("Enter 2 to edit contact:");
+            System.out.println("Enter 3 to delete contact");
+            System.out.println("Enter 4 to Search contact");
+            System.out.println("Enter 5 to count person details by city");
+            System.out.println("Enter 6 to count person details by state");
+            System.out.println("Enter 0 to exit:");
+            menu = scanner.nextInt();
             switch (menu) {
                 case 1:
                     newPersonDetails.addContact();
@@ -34,15 +35,16 @@ public class AddressBookMain extends ContactPerson {
                 case 4:
                     newPersonDetails.searchPersonDetails();
                     break;
+                case 5:
+                    newPersonDetails.countByCity();
+                    break;
+                case 6:
+                    newPersonDetails.countByState();
+                    break;
             }
-            System.out.println("Enter 1 to add contact:");
-            System.out.println("Enter 2 to edit contact:");
-            System.out.println("Enter 3 to delete contact");
-            System.out.println("Enter 4 to Search contact");
-            System.out.println("Enter 0 to exit:");
-            menu = scanner.nextInt();
         }
         System.out.println("Goodbye from addressBook");
+        System.out.println("Back To dictionary:!!");
     }
 
     public void addContact() {
@@ -124,18 +126,33 @@ public class AddressBookMain extends ContactPerson {
             System.out.println("Contact not found:");
         }
     }
+
     // search by state
     void searchPersonDetails() {
         System.out.println("Enter the name of state:");
         String stateName = scanner.next();
         List<ContactPerson> ref_var = personDetails.stream()
-                .filter(state -> state.state.equals(stateName)).collect(Collectors.toList());
-                for(ContactPerson contactPerson : ref_var){
-                    System.out.println("Details are: " + contactPerson);
-                }
+                .filter(state -> state.getState().equals(stateName)).collect(Collectors.toList());
+        for (ContactPerson contactPerson : ref_var) {
+            System.out.println("Details are: " + contactPerson);
+        }
 
     }
-//    public static void main(String[] args) {
-//        newPersonDetails.menu();
-//    }
+
+    // count by city method
+    void countByCity() {
+        System.out.println("Enter city name: ");
+        String cityName = scanner.next();
+        long countCity = personDetails.stream()
+                .filter(City -> cityName.equals(City.getCity())).count();
+        System.out.println("Number of person details by city: " + cityName + " -> " + countCity);
+    }
+
+    // count by state method
+    void countByState() {
+        System.out.println("Enter state name: ");
+        String stateName = scanner.next();
+        long countState = personDetails.stream().filter(state -> stateName.equals(state.getState())).count();
+        System.out.println("Number of person details by state: " + stateName + " -> " + countState);
+    }
 }
