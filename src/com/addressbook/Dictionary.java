@@ -55,13 +55,13 @@ public class Dictionary {
         }
     }
 
-//    void searchPersonDetails() {
-//        System.out.println("Enter the name of state:");
-//        String stateName = scanner.next();
-//        addressHashMap.get(addressBookMain).personDetails.stream()
-//                .filter(state -> state.state.equals(stateName))
-//                .forEach(key -> System.out.println(key));
-//    }
+    void viewPersonDetailsByState() {
+        System.out.println("Enter the name of state:");
+        String stateName = scanner.next();
+        addressHashMap.get(addressBookMain).personDetails.stream()
+                .filter(state -> state.state.equals(stateName))
+                .forEach(found -> System.out.println(found));
+    }
 
     public static void main(String[] args) {
         int flag = 0;
@@ -70,7 +70,8 @@ public class Dictionary {
             System.out.println("Enter 2 to View:");
             System.out.println("Enter 3 to Delete");
             System.out.println("Enter 4 to Select");
-            System.out.println("Enter 5 to Exit:");
+            System.out.println("Enter 5 to view person");
+            System.out.println("Enter 6 to Exit:");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -86,6 +87,9 @@ public class Dictionary {
                     dictionary.selectAddressBook();
                     break;
                 case 5:
+                    dictionary.viewPersonDetailsByState();
+                    break;
+                case 6:
                     flag = 1;
                     System.out.println("Goodbye from address book");
             }
