@@ -62,7 +62,6 @@ public class Dictionary {
                 .filter(state -> state.state.equals(stateName))
                 .forEach(found -> System.out.println("First Name: " + found.firstName + ", Phone_Number: " + found.phoneNumber));
     }
-
     public static void main(String[] args) {
         int choice = 1;
         while (choice != 0) {
