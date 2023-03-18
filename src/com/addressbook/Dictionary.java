@@ -28,7 +28,7 @@ public class Dictionary {
     }
 
     // Method to select address book and perform operation
-    public void selectAddressBook() {
+    public void selectAddressBook() throws Exception {
         displayAddressBook();
         System.out.println("Select the name of address book:");
         String addressBookName = scanner.next();
@@ -63,7 +63,7 @@ public class Dictionary {
                 .forEach(found -> System.out.println("First Name: " + found.firstName + ", Phone_Number: " + found.phoneNumber));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         int choice = 1;
         while (choice != 0) {
             System.out.println("Enter 1 to Add");
