@@ -1,5 +1,6 @@
 package com.addressbook;
 
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -9,53 +10,13 @@ public class AddressBookMain extends ContactPerson {
     public static AddressBookMain newPersonDetails = new AddressBookMain();
     public static ArrayList<ContactPerson> personDetails = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
+    static File file1 = new File("AddressBookStore.txt");
+    static File file2 = new File("AddressBookObj.txt");
+    static ObjectInputStream objectInputStreamReader = null;
+    static ObjectOutputStream objectOutputStream = null;
+    static OutputStreamWriter outputStreamWriter = null;
 
-    public void menu() {
-        int menu = 1;
-        while (menu != 0) {
-            System.out.println("Enter 1 to add contact:");
-            System.out.println("Enter 2 to edit contact:");
-            System.out.println("Enter 3 to delete contact:");
-            System.out.println("Enter 4 to Search contact:");
-            System.out.println("Enter 5 to count person details by city:");
-            System.out.println("Enter 6 to count person details by state:");
-            System.out.println("Enter 7 to sort by name:");
-            System.out.println("Enter 8 to sort by zip:");
-            System.out.println("Enter 0 to exit:");
-            menu = scanner.nextInt();
-            switch (menu) {
-                case 1:
-                    newPersonDetails.addContact();
-                    break;
-
-                case 2:
-                    newPersonDetails.editDetails();
-                    break;
-                case 3:
-                    newPersonDetails.deleteDetails();
-                    break;
-                case 4:
-                    newPersonDetails.searchPersonDetails();
-                    break;
-                case 5:
-                    newPersonDetails.countByCity();
-                    break;
-                case 6:
-                    newPersonDetails.countByState();
-                    break;
-                case 7:
-                    newPersonDetails.sortByName();
-                    break;
-                case 8:
-                    newPersonDetails.sortByZip();
-                    break;
-            }
-        }
-        System.out.println("Goodbye from addressBook");
-        System.out.println("Back To dictionary:!!");
-    }
-
-    public void addContact() {
+    public void addContact() throws Exception {
         // Taking user input
         System.out.println("Enter first name: ");
         newPersonDetails.setFirstName(scanner.next());
@@ -82,7 +43,27 @@ public class AddressBookMain extends ContactPerson {
         // Adding details in address book
         personDetails.add(new ContactPerson(newPersonDetails.getFirstName(), newPersonDetails.getLastName(), newPersonDetails.getAddress(),
                 newPersonDetails.getCity(), newPersonDetails.getState(), newPersonDetails.getZip(), newPersonDetails.getPhoneNumber(), newPersonDetails.getEmail()));
+
+        //  writes the data
+        objectOutputStream = new ObjectOutputStream(new FileOutputStream(file2));
+        objectOutputStream.writeObject(personDetails);
+        objectOutputStream.close();
+        // readable format
+        outputStreamWriter = new OutputStreamWriter(new FileOutputStream(file1));
+        outputStreamWriter.write(personDetails.toString());
+        outputStreamWriter.close();
         personDetails.forEach(System.out::println);
+    }
+    // reads contacts from file
+    public void readFile() {
+        if (file1.isFile()) {
+            try {
+                objectInputStreamReader = new ObjectInputStream(new FileInputStream(file1));
+                personDetails = (ArrayList<ContactPerson>) objectInputStreamReader.readObject();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 
     // Edit the contact with name
@@ -107,7 +88,6 @@ public class AddressBookMain extends ContactPerson {
             newPersonDetails.setPhoneNumber(scanner.next());
             System.out.println("Edit gmail:");
             newPersonDetails.setEmail(scanner.next());
-
             //  personDetails.add(newPersonDetails);
             personDetails.forEach(System.out::println);
         } else {
@@ -176,5 +156,52 @@ public class AddressBookMain extends ContactPerson {
         System.out.println("Sorted Details are:!!");
         personDetails.stream().sorted(Comparator.comparing(ContactPerson::getZip))
                 .forEach(System.out::println);
+    }
+
+    // for menu
+    public void menu() throws Exception {
+        readFile();
+        int menu = 1;
+        while (menu != 0) {
+            System.out.println("Enter 1 to add contact:");
+            System.out.println("Enter 2 to edit contact:");
+            System.out.println("Enter 3 to delete contact:");
+            System.out.println("Enter 4 to Search contact:");
+            System.out.println("Enter 5 to count person details by city:");
+            System.out.println("Enter 6 to count person details by state:");
+            System.out.println("Enter 7 to sort by name:");
+            System.out.println("Enter 8 to sort by zip:");
+            System.out.println("Enter 0 to exit:");
+            menu = scanner.nextInt();
+            switch (menu) {
+                case 1:
+                    newPersonDetails.addContact();
+                    break;
+
+                case 2:
+                    newPersonDetails.editDetails();
+                    break;
+                case 3:
+                    newPersonDetails.deleteDetails();
+                    break;
+                case 4:
+                    newPersonDetails.searchPersonDetails();
+                    break;
+                case 5:
+                    newPersonDetails.countByCity();
+                    break;
+                case 6:
+                    newPersonDetails.countByState();
+                    break;
+                case 7:
+                    newPersonDetails.sortByName();
+                    break;
+                case 8:
+                    newPersonDetails.sortByZip();
+                    break;
+            }
+        }
+        System.out.println("Good Bye from addressBook");
+        System.out.println("Back To dictionary:!!");
     }
 }

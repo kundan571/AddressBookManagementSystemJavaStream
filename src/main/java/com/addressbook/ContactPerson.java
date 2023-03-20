@@ -1,6 +1,8 @@
 package com.addressbook;
 
-public class ContactPerson {
+import java.io.Serializable;
+
+public class ContactPerson implements Serializable {
     String firstName;
     String lastName;
     String address;
